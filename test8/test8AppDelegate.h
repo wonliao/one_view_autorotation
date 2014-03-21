@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface test8AppDelegate : UIResponder <UIApplicationDelegate>
+@interface test8AppDelegate : UIResponder <UIApplicationDelegate> {
+    bool enableRotateFlag;
+}
+
 
 @property (strong, nonatomic) UIWindow *window;
+
+
+- (void) enableRotate:(bool)flag;
 
 @end

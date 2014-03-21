@@ -8,13 +8,14 @@
 
 #import "test8AppDelegate.h"
 
-#import "test8SecondViewController.h"
-
 @implementation test8AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.    
+    // Override point for customization after application launch.
+    
+    enableRotateFlag = false;
+
     return YES;
 }
 							
@@ -49,51 +50,20 @@
 
 
 
-
-
-
-
-
-
+- (void) enableRotate:(bool)flag
+{
+    enableRotateFlag = flag;
+}
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
-    UIViewController *currentViewController = [self topViewController];
-
-    // 指定某一 viewController 可旋轉的方向
-    if([currentViewController isKindOfClass: [test8SecondViewController class]])
+    if(enableRotateFlag == true)
     {
         return UIInterfaceOrientationMaskAll;
     }
     
-    return UIInterfaceOrientationMaskPortrait;
-}
-
-- (void)canRotate { }
-
-- (UIViewController*)topViewController {
-
-    return [self topViewControllerWithRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
-}
-
-- (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController {
     
-    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
-        
-        UITabBarController* tabBarController = (UITabBarController*)rootViewController;
-        return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
-    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
-        
-        UINavigationController* navigationController = (UINavigationController*)rootViewController;
-        return [self topViewControllerWithRootViewController:navigationController.visibleViewController];
-    } else if (rootViewController.presentedViewController) {
-        
-        UIViewController* presentedViewController = rootViewController.presentedViewController;
-        return [self topViewControllerWithRootViewController:presentedViewController];
-    } else {
-        
-        return rootViewController;
-    }
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 
